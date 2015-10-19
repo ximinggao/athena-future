@@ -1,10 +1,10 @@
 .gradle
 build/
 data/
-athena-backend.ids
-athena-backend.iml
-athena-backend.ipr
-athena-backend.iws
+*.ids
+*.iml
+*.ipr
+*.iws
 out/
 *.log
 
