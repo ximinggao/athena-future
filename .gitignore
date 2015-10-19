@@ -1,0 +1,15 @@
+.gradle
+build/
+data/
+athena-backend.ids
+athena-backend.iml
+athena-backend.ipr
+athena-backend.iws
+out/
+*.log
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
