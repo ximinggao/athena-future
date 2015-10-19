@@ -1,4 +1,4 @@
-package com.athena;
+package com.athena.account;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

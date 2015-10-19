@@ -1,5 +1,6 @@
-package com.athena;
+package com.athena.account;
 
+import com.athena.account.AccountApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.web.WebAppConfiguration;
