@@ -1,11 +1,11 @@
 server:
   port: 8765
 
-spring:
-  application:
-    name: edge-server
-
 eureka:
+  instance:
+    metadataMap:
+      instanceId:
+        ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     healthcheck:
       enabled: true
