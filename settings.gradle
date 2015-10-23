@@ -1,2 +1,2 @@
-include 'core:account'
-include 'support:edge', 'support:service-discovery', 'support:config-manager'
+include 'core/account'
+include 'support/edge', 'support/service-discovery', 'support/config-manager'
