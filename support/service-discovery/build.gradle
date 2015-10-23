@@ -14,10 +14,10 @@ buildscript {
 apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
 
-jar {
+/*jar {
     baseName = 'service-discovery'
     version = '0.0.1-SNAPSHOT'
-}
+}*/
 
 repositories {
     mavenCentral()
