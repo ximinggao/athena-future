@@ -14,10 +14,10 @@ buildscript {
 apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
 
-jar {
+/*jar {
     baseName = 'edge'
     version = '0.0.1-SNAPSHOT'
-}
+}*/
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
