@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * ÊµÏÖSpringSecurityµÄUserDetailsService½Ó¿Ú,ÊµÏÖ»ñÈ¡ÓÃ»§DetailĞÅÏ¢µÄ»Øµ÷º¯Êı.
+ * å®ç°SpringSecurityçš„UserDetailsServiceæ¥å£,å®ç°è·å–ç”¨æˆ·Detailä¿¡æ¯çš„å›è°ƒå‡½æ•°.
  *
  * Created by Lingfeng on 2015/10/27.
  */
@@ -28,7 +28,7 @@ public class StadiumUserDetailsService extends JdbcDaoSupport implements UserDet
     }
 
     /**
-     * »ñÈ¡ÓÃ»§DetailsĞÅÏ¢µÄ»Øµ÷º¯Êı.
+     * è·å–ç”¨æˆ·Detailsä¿¡æ¯çš„å›è°ƒå‡½æ•°.
      *
      * @param username
      * @return
@@ -56,7 +56,7 @@ public class StadiumUserDetailsService extends JdbcDaoSupport implements UserDet
     }
 
     /**
-     * Êı¾İ¿â¼ÓÔØÓÃ»§ĞÅÏ¢
+     * æ•°æ®åº“åŠ è½½ç”¨æˆ·ä¿¡æ¯
      *
      * @param username
      * @return
@@ -78,7 +78,7 @@ public class StadiumUserDetailsService extends JdbcDaoSupport implements UserDet
     }
 
     /**
-     * »ñµÃÓÃ»§ËùÓĞ½ÇÉ«µÄÈ¨ÏŞ¼¯ºÏ
+     * è·å¾—ç”¨æˆ·æ‰€æœ‰è§’è‰²çš„æƒé™é›†åˆ
      *
      * @param id
      * @return
