@@ -1,2 +1,2 @@
-include 'core/account'
+include 'core/account', 'core/stadium'
 include 'support/edge', 'support/service-discovery', 'support/config-manager'
