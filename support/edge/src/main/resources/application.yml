@@ -9,3 +9,12 @@ eureka:
   client:
     healthcheck:
       enabled: true
+
+zuul:
+  ignoredServices: "*"
+  routes:
+    account-service: /api/account/**
+
+### for testing ###
+security.basic.enabled: false
+management.security.enabled: false
