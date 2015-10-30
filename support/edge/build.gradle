@@ -29,6 +29,8 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-security')
     compile('org.springframework.cloud:spring-cloud-starter')
     compile('org.springframework.cloud:spring-cloud-starter-zuul')
+    compile('org.springframework.boot:spring-boot-starter-redis')
+    compile('org.springframework.session:spring-session:1.0.2.RELEASE')
     compile('org.springframework.boot:spring-boot-starter-hateoas')
     compile('org.springframework.boot:spring-boot-starter-web') {
         exclude module: 'spring-boot-starter-tomcat'

@@ -7,5 +7,9 @@ eureka:
       instanceId:
         ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
-security.basic.enabled: false
+security:
+  basic:
+    enabled: false
+  sessions: NEVER
+
 management.security.enabled: false

@@ -31,6 +31,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-integration')
     compile('org.springframework.boot:spring-boot-starter-jdbc')
     compile('org.springframework.boot:spring-boot-starter-redis')
+    compile('org.springframework.session:spring-session:1.0.2.RELEASE')
     //compile('org.springframework.boot:spring-boot-starter-remote-shell')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-web') {
