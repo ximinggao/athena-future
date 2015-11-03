@@ -1,3 +1,5 @@
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+
 buildscript {
     repositories {
         jcenter()
@@ -59,12 +61,12 @@ subprojects {
         into project.file('build/docker')
     }
 
-    task createDockerfile(type: com.bmuschko.gradle.docker.tasks.image.Dockerfile) {
+    task createDockerfile(type: Dockerfile) {
         dependsOn build, copyJar
 
         destFile = project.file('build/docker/Dockerfile')
 
-        from 'debian'
+        from 'java'
         maintainer 'Backend Team <backend@1yd.me>'
         runCommand 'groupadd -r athena && useradd -r -g athena athena'
         runCommand 'mkdir /athena && chown athena:athena /athena'
