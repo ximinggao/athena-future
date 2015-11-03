@@ -1,5 +1,5 @@
 server:
-  port: 2
+  port: 0
 
 eureka:
   instance:
@@ -12,10 +12,10 @@ eureka:
 #  name: stadium
 #  description: Cornerstone for Tianjian Platform
 
-management:
-  context-path: /manage
-  port: 8081
-  security.enabled: false
+#management:
+#  context-path: /manage
+#  port: 8081
+#  security.enabled: false
 
 stadium:
   rememberMe.key: katrina

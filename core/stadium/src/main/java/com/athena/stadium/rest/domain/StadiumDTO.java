@@ -12,4 +12,7 @@ public class StadiumDTO {
 
     @NotNull
     private String name;
+
+    @NotNull
+    private String pwd;
 }
