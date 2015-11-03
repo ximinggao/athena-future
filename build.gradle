@@ -40,47 +40,46 @@ subprojects {
 
     apply plugin: 'com.bmuschko.docker-remote-api'
 
-    docker {
-        url = 'https://192.168.99.100:2376'
-        certPath = new File(System.properties['user.home'], '.docker/machine/certs')
+    def jarName = jar.baseName << '-' << jar.version << '.jar'
 
-        registryCredentials {
-            url = 'https://index.docker.io/v1'
-            username = 'backend'
-            password = 'backend'
-            email = 'backend@1yd.me'
-        }
+//    docker {
+//        url = 'https://192.168.99.100:2376'
+//        certPath = new File(System.properties['user.home'], '.docker/machine/certs')
+//
+//        registryCredentials {
+//            url = 'https://index.docker.io/v1'
+//            username = 'backend'
+//            password = 'backend'
+//            email = 'backend@1yd.me'
+//        }
+//    }
+
+    task copyJar(type: Copy) {
+        from project.file('build/libs/' << jarName)
+        into project.file('build/docker')
     }
 
     task createDockerfile(type: com.bmuschko.gradle.docker.tasks.image.Dockerfile) {
-        def jarName = jar.baseName << '-' << jar.version << '.jar'
-        destFile = project.file('build/dockerfile/Dockerfile')
+        dependsOn build, copyJar
+
+        destFile = project.file('build/docker/Dockerfile')
 
         from 'debian'
         maintainer 'Backend Team <backend@1yd.me>'
-        addFile new String('libs/' << jarName), new String('/' << jarName)
-        runCommand 'echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections' +
-                ' && echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" > /etc/apt/sources.list.d/webupd8team-java-trusty.list' +
-                ' && apt-key adv --keyserver keyserver.ubuntu.com:80 --recv-keys EEA14886' +
-                ' && apt-get update' +
-                ' && DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes --no-install-recommends oracle-java8-installer' +
-                ' && apt-get install -y oracle-java8-set-default' +
-                ' && apt-get autoremove && apt-get clean' +
-                ' && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/oracle-jdk8-installer'
-        defaultCommand 'java', '-jar', new String('/' << jarName)
+        runCommand 'groupadd -r athena && useradd -r -g athena athena'
+        runCommand 'mkdir /athena && chown athena:athena /athena'
+        workingDir '/athena'
+        copyFile new String(jarName), new String('/athena/')
+        //defaultCommand 'java', '-jar', new String('/' << jarName)
     }
 
-    task copyJar(type: Copy) {
-        from project.file('build/libs')
-        into project.file('build/dockerfile/libs')
-    }
 
-    task buildImage(type: com.bmuschko.gradle.docker.tasks.image.DockerBuildImage) {
-        createDockerfile.shouldRunAfter build
-        copyJar.shouldRunAfter createDockerfile
-        dependsOn build, createDockerfile, copyJar
-
-        inputDir = createDockerfile.destFile.parentFile
-        tag = '1yd/' << jar.baseName
-    }
+//    task buildImage(type: com.bmuschko.gradle.docker.tasks.image.DockerBuildImage) {
+//        createDockerfile.shouldRunAfter build
+//        copyJar.shouldRunAfter createDockerfile
+//        dependsOn build, createDockerfile, copyJar
+//
+//        inputDir = createDockerfile.destFile.parentFile
+//        tag = '1yd/' << jar.baseName
+//    }
 }
