@@ -102,7 +102,10 @@ subprojects {
         defaultCommand 'java', '-jar', jarName.toString()
     }
 
-
+    configure(createDockerfile) {
+        group = 'Docker'
+        description = 'Create Dockerfile for this project'
+    }
 //    task buildImage(type: com.bmuschko.gradle.docker.tasks.image.DockerBuildImage) {
 //        createDockerfile.shouldRunAfter build
 //        copyJar.shouldRunAfter createDockerfile
