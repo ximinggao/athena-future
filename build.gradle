@@ -57,22 +57,49 @@ subprojects {
 //    }
 
     task copyJar(type: Copy) {
-        from project.file('build/libs/' << jarName)
-        into project.file('build/docker')
+        dependsOn build
+
+        from project.file("$project.buildDir/libs/" << jarName)
+        into project.file("$project.buildDir/docker")
     }
 
     task createDockerfile(type: Dockerfile) {
-        dependsOn build, copyJar
+        dependsOn copyJar
 
-        destFile = project.file('build/docker/Dockerfile')
+        // Generate docker-entrypoint.sh
+        def bashFile = new File("$project.buildDir/docker/docker-entrypoint.sh")
+        bashFile.getParentFile().mkdirs()
+        bashFile.createNewFile()
+        bashFile.withWriter('UTF-8') {
+            writer ->
+                writer.println '#!/bin/bash'
+                writer.println 'set -e'
+                writer.println 'if [ "$3" = "' + jarName + '" ]; then'
+                writer.println '  chown -R athena .'
+                writer.println '  exec gosu athena "$@"'
+                writer.println 'fi'
+                writer.println 'exec "$@"'
+        }
 
+        // Generate Dockerfile
         from 'java'
         maintainer 'Backend Team <backend@1yd.me>'
         runCommand 'groupadd -r athena && useradd -r -g athena athena'
+
+        runCommand 'gpg --keyserver pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4'
+        runCommand 'curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.6/gosu-$(dpkg --print-architecture)" \\\n' +
+                '\t&& curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.6/gosu-$(dpkg --print-architecture).asc" \\\n' +
+                '\t&& gpg --verify /usr/local/bin/gosu.asc \\\n' +
+                '\t&& rm /usr/local/bin/gosu.asc \\\n' +
+                '\t&& chmod +x /usr/local/bin/gosu'
+
         runCommand 'mkdir /athena && chown athena:athena /athena'
         workingDir '/athena'
-        copyFile new String(jarName), new String('/athena/')
-        //defaultCommand 'java', '-jar', new String('/' << jarName)
+        copyFile jarName.toString(), '/athena/'
+        copyFile 'docker-entrypoint.sh', '/entrypoint.sh'
+        runCommand 'chmod +x /entrypoint.sh'
+        entryPoint '/entrypoint.sh'
+        defaultCommand 'java', '-jar', jarName.toString()
     }
 
 
