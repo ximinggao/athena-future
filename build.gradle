@@ -1,3 +1,4 @@
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 
 buildscript {
@@ -102,16 +103,20 @@ subprojects {
         defaultCommand 'java', '-jar', jarName.toString()
     }
 
+    task buildDockerImage(type: DockerBuildImage) {
+        dependsOn createDockerfile
+
+        inputDir = createDockerfile.destFile.parentFile
+        tag = 'athena/' << jar.baseName
+    }
+
     configure(createDockerfile) {
         group = 'Docker'
         description = 'Create Dockerfile for this project'
     }
-//    task buildImage(type: com.bmuschko.gradle.docker.tasks.image.DockerBuildImage) {
-//        createDockerfile.shouldRunAfter build
-//        copyJar.shouldRunAfter createDockerfile
-//        dependsOn build, createDockerfile, copyJar
-//
-//        inputDir = createDockerfile.destFile.parentFile
-//        tag = '1yd/' << jar.baseName
-//    }
+
+    configure(buildDockerImage) {
+        group = 'Docker'
+        description = 'Build docker image for this project'
+    }
 }

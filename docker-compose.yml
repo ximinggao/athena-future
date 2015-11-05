@@ -16,14 +16,14 @@ discovery:
     - "8761:8761"
 
 edge:
-  image: athena/edge-server
+  image: athena/edge
   links:
     - rabbitmq
     - redis
     - discovery
 
 account:
-  image: athena/account-server
+  image: athena/account
   links:
     - rabbitmq
     - redis
