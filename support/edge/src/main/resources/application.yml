@@ -1,5 +1,10 @@
 server:
-  port: 8765
+  port: 8443
+  ssl:
+    key-store: classpath:keystore.dev.p12
+    key-store-password: testing
+    keyStoreType: PKCS12
+    keyAlias: undertow
 
 eureka:
   instance:

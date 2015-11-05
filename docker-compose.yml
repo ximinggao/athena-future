@@ -1,0 +1,30 @@
+rabbitmq:
+  image: rabbitmq
+  ports:
+    - "5672:5672"
+    - "25672:25672"
+    - "4369:4369"
+
+redis:
+  image: redis
+  ports:
+    - "6379:6379"
+
+discovery:
+  image: athena/service-discovery
+  ports:
+    - "8761:8761"
+
+edge:
+  image: athena/edge-server
+  links:
+    - rabbitmq
+    - redis
+    - discovery
+
+account:
+  image: athena/account-server
+  links:
+    - rabbitmq
+    - redis
+    - discovery
