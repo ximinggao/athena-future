@@ -1,0 +1,14 @@
+|===
+|Path|Type|Description|Constraints
+
+|name
+|String
+|The user's name details
+|Must not be null or empty
+
+|pwd
+|String
+|The user's password
+|Must by a valid password
+
+|===
