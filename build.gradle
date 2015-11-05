@@ -45,8 +45,8 @@ subprojects {
 
     def jarName = jar.baseName << '-' << jar.version << '.jar'
 
-//    docker {
-//        url = 'https://192.168.99.100:2376'
+    docker {
+        url = 'unix:///var/run/docker.sock'
 //        certPath = new File(System.properties['user.home'], '.docker/machine/certs')
 //
 //        registryCredentials {
@@ -55,7 +55,7 @@ subprojects {
 //            password = 'backend'
 //            email = 'backend@1yd.me'
 //        }
-//    }
+    }
 
     task copyJar(type: Copy) {
         dependsOn build
