@@ -1,5 +1,5 @@
 server:
-  port: 8443
+  port: 8765
   ssl:
     key-store: classpath:keystore.dev.p12
     key-store-password: testing
@@ -31,7 +31,19 @@ management:
   security:
     enabled: false
 
+---
+# For deployment in docker containers
 spring:
+  profiles: docker
   redis:
-    host: localhost
+    host: redis
     port: 6379
+  rabbitmq:
+      host: rabbitmq
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/

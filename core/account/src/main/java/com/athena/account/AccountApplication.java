@@ -24,6 +24,6 @@ public class AccountApplication {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
-        return "Hello World from Account: " + DNA;
+        return "Hello World from Account-Service: " + DNA;
     }
 }

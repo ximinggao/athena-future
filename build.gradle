@@ -75,7 +75,7 @@ subprojects {
             writer ->
                 writer.println '#!/bin/bash'
                 writer.println 'set -e'
-                writer.println 'if [ "$3" = "' + jarName + '" ]; then'
+                writer.println 'if [ "$4" = "' + jarName + '" ]; then'
                 writer.println '  chown -R athena .'
                 writer.println '  exec gosu athena "$@"'
                 writer.println 'fi'
@@ -100,7 +100,11 @@ subprojects {
         copyFile 'docker-entrypoint.sh', '/entrypoint.sh'
         runCommand 'chmod +x /entrypoint.sh'
         entryPoint '/entrypoint.sh'
-        defaultCommand 'java', '-jar', jarName.toString()
+
+        // JAVA_OPTS seems not working, need to further investigate
+        // environmentVariable 'JAVA_OPTS', '-Dspring.profiles.active=docker'
+
+        defaultCommand 'java', '-Dspring.profiles.active=docker', '-jar', jarName.toString()
     }
 
     task buildDockerImage(type: DockerBuildImage) {

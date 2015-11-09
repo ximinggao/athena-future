@@ -1,5 +1,6 @@
 rabbitmq:
   image: rabbitmq
+#  net: "athena"
   ports:
     - "5672:5672"
     - "25672:25672"
@@ -7,16 +8,24 @@ rabbitmq:
 
 redis:
   image: redis
+#  net: "athena"
   ports:
     - "6379:6379"
 
 discovery:
   image: athena/service-discovery
+#  net: "athena"
   ports:
     - "8761:8761"
+  links:
+    - redis
+    - rabbitmq
 
 edge:
   image: athena/edge
+  ports:
+    - "443:8765"
+#  net: "athena"
   links:
     - rabbitmq
     - redis
@@ -24,6 +33,7 @@ edge:
 
 account:
   image: athena/account
+#  net: "athena"
   links:
     - rabbitmq
     - redis
