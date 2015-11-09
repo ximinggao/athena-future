@@ -22,6 +22,6 @@ public class EdgeApplication {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
-        return "Hello World from Edge-Server at " + new Date().toString();
+        return "Hello World from Edge-Server at " + new Date();
     }
 }

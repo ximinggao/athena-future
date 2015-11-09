@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.UUID;
 
 @SpringBootApplication
@@ -24,6 +25,6 @@ public class AccountApplication {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
-        return "Hello World from Account-Service: " + DNA;
+        return "Hello World from Account-Service " + DNA + " at " + new Date();
     }
 }
