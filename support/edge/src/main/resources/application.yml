@@ -23,6 +23,7 @@ zuul:
 ### for testing ###
 security:
   user:
+    name: 18656234569
     password: password
   sessions: ALWAYS
   #basic.enabled: false
@@ -30,6 +31,29 @@ security:
 management:
   security:
     enabled: false
+
+athena:
+  rememberMe.key: katrina
+
+# Setting active profile
+spring:
+  profiles:
+    active: dev
+
+---
+# Configuration for development
+spring:
+  profiles: dev
+  output.ansi.enabled: always
+  datasource:
+    url: jdbc:h2:mem:dev;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+  jpa:
+    show-sql: true
+
+logging.level:
+  com.athena: DEBUG
+  org.springframework.security: DEBUG
 
 ---
 # For deployment in docker containers

@@ -15,6 +15,9 @@ eureka:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
+spring:
+  output.ansi.enabled: always
+
 ---
 # For deployment in Docker containers
 spring:
