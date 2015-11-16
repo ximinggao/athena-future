@@ -30,7 +30,10 @@ public class User {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "USER_ROLES")
+    @JoinTable(name = "USER_ROLES",
+        joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
+        inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"),
+        uniqueConstraints = @UniqueConstraint(columnNames = {"USER_ID", "ROLE_ID"}))
     private List<Role> roles;
 
     @Column(updatable = false, insertable = false, nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
