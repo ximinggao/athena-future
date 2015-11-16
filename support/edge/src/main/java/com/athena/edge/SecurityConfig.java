@@ -71,9 +71,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/signup").permitAll()
-                //.antMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated();
+                    .antMatchers("/", "/signup").permitAll()
+                    //.antMatchers("/admin/**").hasRole("ADMIN")
+                    .anyRequest().authenticated();
     }
 
     private Filter csrfHeaderFilter() {

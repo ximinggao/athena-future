@@ -1,5 +1,6 @@
 package com.athena.edge;
 
+import com.athena.AthenaUserDetails;
 import com.athena.edge.account.AccountService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

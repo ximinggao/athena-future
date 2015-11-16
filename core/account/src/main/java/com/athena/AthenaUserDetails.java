@@ -1,4 +1,4 @@
-package com.athena.edge;
+package com.athena;
 
 import lombok.Data;
 import org.springframework.security.core.CredentialsContainer;

@@ -1,6 +1,6 @@
 package com.athena.edge.account;
 
-import com.athena.edge.AthenaUserDetails;
+import com.athena.AthenaUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

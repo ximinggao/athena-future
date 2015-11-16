@@ -8,11 +8,24 @@ eureka:
         ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 security:
-  basic:
-    enabled: false
   sessions: NEVER
 
 management.security.enabled: false
+
+# Setting active profile
+spring:
+  profiles:
+    active: dev
+
+---
+# Configuration for development
+spring:
+  profiles: dev
+  output.ansi.enabled: always
+
+logging.level:
+  com.athena: DEBUG
+  org.springframework.security: DEBUG
 
 ---
 # For deployment in docker containers
