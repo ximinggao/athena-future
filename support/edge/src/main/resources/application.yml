@@ -19,6 +19,15 @@ zuul:
   ignoredServices: "*"
   routes:
     account-service: /api/account/**
+  host:
+    socket-timeout-millis: 30000
+    connect-timeout-millis: 10000
+
+ribbon:
+  readTimeout: 10000
+  connectTimeout: 10000
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
 
 ### for testing ###
 security:
