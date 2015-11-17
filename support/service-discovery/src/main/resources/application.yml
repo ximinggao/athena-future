@@ -18,6 +18,11 @@ eureka:
 spring:
   output.ansi.enabled: always
 
+security:
+  user:
+    name: user
+    password: password
+
 ---
 # For deployment in Docker containers
 spring:
