@@ -21,8 +21,9 @@ allprojects {
     apply plugin: 'idea'
 }
 
-configure(subprojects - project(':common/lib')) {
+subprojects {
     apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
 
     jar {
         baseName = project.getName().substring(project.getName().indexOf('/') + 1)
@@ -32,29 +33,11 @@ configure(subprojects - project(':common/lib')) {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
-
-//    buildscript {
-//        ext {
-//            springBootVersion = '1.2.7.RELEASE'
-//        }
-//        repositories {
-//            mavenCentral()
-//        }
-//        dependencies {
-//            classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-//            classpath('io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE')
-//        }
-//    }
-
-    apply plugin: 'spring-boot'
-    apply plugin: 'io.spring.dependency-management'
-
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        compile project(':common/lib')
         compile('org.springframework.boot:spring-boot-starter-actuator')
         compile('org.springframework.boot:spring-boot-starter-amqp')
         compile('org.springframework.cloud:spring-cloud-starter-bus-amqp')
@@ -98,7 +81,14 @@ configure(subprojects - project(':common/lib')) {
     task wrapper(type: Wrapper) {
         gradleVersion = '2.7'
     }
+}
 
+configure(subprojects - project(':common/lib')) {
+    dependencies {
+        compile project(':common/lib')
+    }
+
+    apply plugin: 'spring-boot'
     apply plugin: 'com.bmuschko.docker-remote-api'
 
     def jarName = jar.baseName << '-' << jar.version << '.jar'
