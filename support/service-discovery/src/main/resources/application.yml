@@ -18,6 +18,9 @@ eureka:
 spring:
   output.ansi.enabled: always
 
+security:
+  basic.enabled: false
+
 ---
 # For deployment in Docker containers
 spring:

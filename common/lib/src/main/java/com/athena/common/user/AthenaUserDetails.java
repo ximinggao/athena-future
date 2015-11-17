@@ -1,4 +1,4 @@
-package com.athena;
+package com.athena.common.user;
 
 import lombok.Data;
 import org.springframework.security.core.CredentialsContainer;
