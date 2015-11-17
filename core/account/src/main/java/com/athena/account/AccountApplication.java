@@ -1,6 +1,6 @@
 package com.athena.account;
 
-import com.athena.AthenaUserDetails;
+import com.athena.common.user.AthenaUserDetails;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
