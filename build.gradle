@@ -15,7 +15,7 @@ allprojects {
     apply plugin: 'idea'
 }
 
-subprojects {
+configure(subprojects - project(':common/lib')) {
     apply plugin: 'java'
 
     jar {
@@ -28,6 +28,10 @@ subprojects {
 
     repositories {
         mavenCentral()
+    }
+
+    dependencies {
+        compile project(':common/lib')
     }
 
     eclipse {
