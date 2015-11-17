@@ -19,9 +19,7 @@ spring:
   output.ansi.enabled: always
 
 security:
-  user:
-    name: user
-    password: password
+  basic.enabled: false
 
 ---
 # For deployment in Docker containers
