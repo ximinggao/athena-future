@@ -1,21 +1,17 @@
 package com.athena.edge.account;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by brook.xi on 11/13/2015.
  */
 @Entity
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 public class Role {
     @Id
     @GeneratedValue
@@ -24,7 +20,4 @@ public class Role {
 
     @Column(nullable = false, unique = true)
     private String name;
-
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
-    private List<User> users;
 }
