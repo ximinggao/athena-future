@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 /**
  * Created by brook.xi on 11/13/2015.
  */
@@ -22,17 +24,16 @@ public class AthenaUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AthenaUserDetails userDetails = accountService.findUserByItem(username);
-
-        if (userDetails == null) {
+        Optional<AthenaUserDetails> userDetails = accountService.findUserByItem(username);
+        return userDetails.map(user -> {
+            if (user.getAuthorities().isEmpty()) {
+                logger.debug("User '" + username + "' has no authorities and will be treated as 'not found'");
+                throw new UsernameNotFoundException("No GrantedAuthority with user " + username);
+            }
+            return user;
+        }).orElseThrow(() -> {
             logger.debug("Query returned no results for user '" + username + "'");
-            throw new UsernameNotFoundException("User not found for " + username);
-        }
-        if (userDetails.getAuthorities().isEmpty()) {
-            logger.debug("User '" + username + "' has no authorities and will be treated as 'not found'");
-            throw new UsernameNotFoundException("No GrantedAuthority with user " + username);
-        }
-
-        return userDetails;
+            return new UsernameNotFoundException("User not found for " + username);
+        });
     }
 }

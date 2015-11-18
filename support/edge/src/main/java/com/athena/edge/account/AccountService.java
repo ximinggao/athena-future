@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -18,18 +19,18 @@ public class AccountService {
     @Autowired
     private UserRepository userRepository;
 
-    public AthenaUserDetails findUserByItem(String item) {
-        User user = userRepository.findByMobile(Long.parseLong(item));
-        if (user != null) {
-            Set<GrantedAuthority> authorities = new HashSet<>();
-            user.getRoles().forEach(role -> {
-                authorities.add(new SimpleGrantedAuthority(role.getName()));
-            });
-            AthenaUserDetails userDetails =
-                    new AthenaUserDetails(user.getId(), user.getMobile(), user.getNickName(), Collections.unmodifiableSet(authorities));
-            userDetails.setPassword(user.getPassword());
-            return userDetails;
-        }
-        return null;
+    public Optional<AthenaUserDetails> findUserByItem(String item) {
+        Optional<User> user = userRepository.findByMobile(Long.parseLong(item));
+        return Optional.ofNullable(
+                user.map(u -> {
+                    Set<GrantedAuthority> authorities = new HashSet<>();
+                    u.getRoles().forEach(role -> {
+                        authorities.add(new SimpleGrantedAuthority(role.getName()));
+                    });
+                    AthenaUserDetails userDetails = new AthenaUserDetails(u.getId(), u.getMobile(), u.getNickName(), Collections.unmodifiableSet(authorities));
+                    userDetails.setPassword(u.getPassword());
+                    return userDetails;
+                }).orElse(null)
+        );
     }
 }
