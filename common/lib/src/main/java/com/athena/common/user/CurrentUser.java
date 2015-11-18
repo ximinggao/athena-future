@@ -21,6 +21,6 @@ public final class CurrentUser {
     }
 
     public static final Optional<String> getNickName() {
-        return Optional.of(getUserDetails().getNickName());
+        return Optional.ofNullable(getUserDetails().getNickName());
     }
 }
