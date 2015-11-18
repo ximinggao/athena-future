@@ -20,7 +20,7 @@ public final class CurrentUser {
         return getUserDetails().getMobile();
     }
 
-    public static final Optional<String> getNickName() {
-        return Optional.ofNullable(getUserDetails().getNickName());
+    public static final Optional<String> getNickname() {
+        return Optional.ofNullable(getUserDetails().getNickname());
     }
 }

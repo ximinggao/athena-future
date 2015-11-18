@@ -38,7 +38,7 @@ public class AccountApplication {
         AthenaUserDetails user = (AthenaUserDetails) auth.getPrincipal();
         return "Username: " + auth.getName()
                 + ", mobile: " + user.getMobile()
-                + ", nickName: " + CurrentUser.getNickName()
+                + ", nickName: " + CurrentUser.getNickname()
                 + " at " + DNA + ". " + new Date();
     }
 }

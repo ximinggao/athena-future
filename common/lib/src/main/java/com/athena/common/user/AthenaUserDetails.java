@@ -15,7 +15,7 @@ public class AthenaUserDetails implements UserDetails, CredentialsContainer {
     private final Long id;
     private String password;
     private final Long mobile;
-    private final String nickName;
+    private final String nickname;
     private final Set<GrantedAuthority> authorities;
     private final boolean accountNonExpired = true;
     private final boolean accountNonLocked = true;
