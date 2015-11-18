@@ -14,7 +14,8 @@ import java.util.Set;
 public class AthenaUserDetails implements UserDetails, CredentialsContainer {
     private final Long id;
     private String password;
-    private final String mobile;
+    private final Long mobile;
+    private final String nickName;
     private final Set<GrantedAuthority> authorities;
     private final boolean accountNonExpired = true;
     private final boolean accountNonLocked = true;

@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  */
 public class AthenaUserDetailsTest {
     @Test public void testAthenaUserDetails() {
-        AthenaUserDetails userDetails = new AthenaUserDetails(1L, "123", null);
+        AthenaUserDetails userDetails = new AthenaUserDetails(1L, 123L, "athena", null);
         assertEquals("AthenaUserDetails.getUsername() should return its id as username", "1", userDetails.getUsername());
     }
 }

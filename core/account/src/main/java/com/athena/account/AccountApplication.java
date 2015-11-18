@@ -1,6 +1,7 @@
 package com.athena.account;
 
 import com.athena.common.user.AthenaUserDetails;
+import com.athena.common.user.CurrentUser;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -35,6 +36,9 @@ public class AccountApplication {
     @RequestMapping(value = "/username", method = RequestMethod.GET)
     public String username(final HttpServletRequest request, Authentication auth) {
         AthenaUserDetails user = (AthenaUserDetails) auth.getPrincipal();
-        return "Username: " + auth.getName() + ", mobile: " + user.getMobile() + " at " + DNA + ". " + new Date();
+        return "Username: " + auth.getName()
+                + ", mobile: " + user.getMobile()
+                + ", nickName: " + CurrentUser.getNickName()
+                + " at " + DNA + ". " + new Date();
     }
 }

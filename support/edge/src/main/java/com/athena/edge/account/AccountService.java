@@ -26,7 +26,7 @@ public class AccountService {
                 authorities.add(new SimpleGrantedAuthority(role.getName()));
             });
             AthenaUserDetails userDetails =
-                    new AthenaUserDetails(user.getId(), user.getMobile().toString(), Collections.unmodifiableSet(authorities));
+                    new AthenaUserDetails(user.getId(), user.getMobile(), user.getNickName(), Collections.unmodifiableSet(authorities));
             userDetails.setPassword(user.getPassword());
             return userDetails;
         }
