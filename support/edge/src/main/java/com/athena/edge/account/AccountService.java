@@ -27,7 +27,7 @@ public class AccountService {
                     u.getRoles().forEach(role -> {
                         authorities.add(new SimpleGrantedAuthority(role.getName()));
                     });
-                    AthenaUserDetails userDetails = new AthenaUserDetails(u.getId(), u.getMobile(), u.getNickName(), Collections.unmodifiableSet(authorities));
+                    AthenaUserDetails userDetails = new AthenaUserDetails(u.getId(), u.getMobile(), u.getNickname(), Collections.unmodifiableSet(authorities));
                     userDetails.setPassword(u.getPassword());
                     return userDetails;
                 }).orElse(null)

@@ -24,7 +24,7 @@ public class User {
     private String password;
 
     @Column(nullable = true)
-    private String nickName;
+    private String nickname;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Role> roles;
