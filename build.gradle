@@ -46,8 +46,9 @@ subprojects {
     def jarName = jar.baseName << '-' << jar.version << '.jar'
 
     docker {
-        url = 'unix:///var/run/docker.sock'
-//        certPath = new File(System.properties['user.home'], '.docker/machine/certs')
+//        url = 'unix:///var/run/docker.sock'
+        url = 'https://192.168.99.100:2376'
+        certPath = new File(System.properties['user.home'], '.docker/machine/certs')
 //
 //        registryCredentials {
 //            url = 'https://index.docker.io/v1'
@@ -73,13 +74,20 @@ subprojects {
         bashFile.createNewFile()
         bashFile.withWriter('UTF-8') {
             writer ->
-                writer.println '#!/bin/bash'
-                writer.println 'set -e'
-                writer.println 'if [ "$4" = "' + jarName + '" ]; then'
-                writer.println '  chown -R athena .'
-                writer.println '  exec gosu athena "$@"'
-                writer.println 'fi'
-                writer.println 'exec "$@"'
+//                writer.println '#!/bin/bash'
+//                writer.println 'set -e'
+//                writer.println 'if [ "$4" = "' + jarName + '" ]; then'
+//                writer.println '  chown -R athena .'
+//                writer.println '  exec gosu athena "$@"'
+//                writer.println 'fi'
+//                writer.println 'exec "$@"'
+                writer.print '#!/bin/bash\n' +
+                             'set -e\n' +
+                             'if [ "$4" = "' + jarName + '" ]; then\n' +
+                             '  chown -R athena .\n' +
+                             '  exec gosu athena "$@"\n' +
+                             'fi\n' +
+                             'exec "$@"'
         }
 
         // Generate Dockerfile
