@@ -44,8 +44,13 @@ management:
 athena:
   rememberMe.key: katrina
 
-# Setting active profile
 spring:
+  output.ansi.enabled: always
+  datasource:
+    data: data-dev.sql
+    url: jdbc:h2:mem:dev;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+#  Setting active profile
   profiles:
     active: dev
 
@@ -53,11 +58,6 @@ spring:
 # Configuration for development
 spring:
   profiles: dev
-  output.ansi.enabled: always
-  datasource:
-    data: data-dev.sql
-    url: jdbc:h2:mem:dev;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
   jpa:
     show-sql: true
 
