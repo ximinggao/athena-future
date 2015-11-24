@@ -1,4 +1,5 @@
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 
 buildscript {
@@ -98,12 +99,12 @@ configure(subprojects - project(':common/lib')) {
 //        url = 'https://192.168.99.100:2376'
 //        certPath = new File(System.properties['user.home'], '.docker/machine/certs')
 //
-//        registryCredentials {
-//            url = 'https://index.docker.io/v1'
-//            username = 'backend'
-//            password = 'backend'
-//            email = 'backend@1yd.me'
-//        }
+        registryCredentials {
+            url = 'https://index.docker.io/v2'
+            username = 'wyyd'
+            password = 'r&d@Tianjian'
+            email = 'tech@1yd.me'
+        }
     }
 
     task copyJar(type: Copy) {
@@ -160,7 +161,18 @@ configure(subprojects - project(':common/lib')) {
         dependsOn createDockerfile
 
         inputDir = createDockerfile.destFile.parentFile
-        tag = 'athena/' << jar.baseName
+        tag = 'tianjian/athena-' << jar.baseName
+        if (project.hasProperty('imageTag')) {
+            tag += ':' << imageTag
+        }
+    }
+
+    task pushDockerImage(type: DockerPushImage) {
+        dependsOn buildDockerImage
+        conventionMapping.imageName = { 'tianjian/athena-' + jar.baseName }
+        if (project.hasProperty('imageTag')) {
+            conventionMapping.tag = { imageTag }
+        }
     }
 
     configure(createDockerfile) {

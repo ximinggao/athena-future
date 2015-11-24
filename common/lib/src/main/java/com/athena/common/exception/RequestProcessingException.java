@@ -1,12 +1,14 @@
 package com.athena.common.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.http.HttpStatus;
 
 /**
  * Created by brook.xi on 11/20/2015.
  */
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class RequestProcessingException extends RuntimeException {
     protected HttpStatus status;
     protected String error;
