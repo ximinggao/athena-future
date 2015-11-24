@@ -1,0 +1,89 @@
+server:
+  port: 0
+
+eureka:
+  instance:
+    metadataMap:
+      instanceId:
+        ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+# Default properties values
+#info.build:
+#  name: stadium
+#  description: Cornerstone for Tianjian Platform
+
+#management:
+#  context-path: /manage
+#  port: 8081
+#  security.enabled: false
+
+stadium:
+  rememberMe.key: katrina
+
+# Setting active profile
+spring:
+  profiles:
+    active: dbValid
+
+---
+
+spring:
+  profiles: dev
+  output.ansi.enabled: always
+  datasource:
+   url: jdbc:h2:mem:dev
+   username: sa
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: validate
+logging.level:
+  com.athena: DEBUG
+  org.springframework.security: DEBUG
+
+---
+
+flyway:
+  enabled: false
+
+spring:
+  profiles: dbValid
+  output.ansi.enabled: always
+  datasource:
+    url: jdbc:mysql://localhost:3306/athena_stadium?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: validate
+logging.level:
+  com.athena: DEBUG
+  org.springframework.security: DEBUG
+
+---
+
+spring:
+  profiles: it
+  jpa:
+    hibernate.ddl-auto: create-drop
+
+---
+
+spring:
+  profiles: qa
+  datasource:
+    url: jdbc:mysql://localhost/athena_qa
+    username: qa
+    password: qa
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: update
+
+---
+
+spring:
+  profiles: prod
+#  include: mysql
+  jpa:
+    hibernate.ddl-auto: validate
+logging:
+  file: ./logs/athena.log
