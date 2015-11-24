@@ -13,7 +13,7 @@ redis:
     - "6379:6379"
 
 discovery:
-  image: athena/service-discovery
+  image: tianjian/athena-service-discovery
 #  net: "athena"
   ports:
     - "8761:8761"
@@ -22,7 +22,7 @@ discovery:
     - rabbitmq
 
 edge:
-  image: athena/edge
+  image: tianjian/athena-edge
   ports:
     - "443:8765"
 #  net: "athena"
@@ -32,7 +32,7 @@ edge:
     - discovery
 
 account:
-  image: athena/account
+  image: tianjian/athena-account
 #  net: "athena"
   links:
     - rabbitmq
