@@ -61,7 +61,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authenticationEntryPoint(authenticationEntryPoint)
                 .and().authorizeRequests()
                     .antMatchers("/stadium/hello").permitAll()
-                    .antMatchers("/restdoc/**").permitAll()
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated();
     }
