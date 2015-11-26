@@ -14,6 +14,11 @@ management.security.enabled: false
 
 # Setting active profile
 spring:
+  output.ansi.enabled: always
+  datasource:
+      schema: createAclSchema.sql
+      url: jdbc:h2:mem:dev;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
   profiles:
     active: dev
 
@@ -21,7 +26,8 @@ spring:
 # Configuration for development
 spring:
   profiles: dev
-  output.ansi.enabled: always
+  jpa:
+      show-sql: true
 
 logging.level:
   com.athena: DEBUG
