@@ -3,12 +3,15 @@ package com.athena.account;
 import com.athena.common.exception.AlreadyBookedException;
 import com.athena.common.user.AthenaUserDetails;
 import com.athena.common.user.CurrentUser;
+import org.h2.tools.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -16,6 +19,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.UUID;
 
@@ -25,10 +29,19 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/")
 @ComponentScan("com.athena")
+@Import({SecurityConfig.class, AclConfig.class})
 public class AccountApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AccountApplication.class, args);
+    }
+
+    // Config H2 tcp server when we're in development stage, in order to
+    // enable inspecting the in-memory database content from outside.
+    @Bean(name = "org.h2.tools.Server", initMethod = "start", destroyMethod = "stop")
+    @Profile("dev")
+    public Server h2TcpServer() throws SQLException {
+        return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9990");
     }
 
     // It seems Spring Boot MessageSourceAutoConfiguration not working (need further checking),
