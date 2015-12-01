@@ -17,6 +17,9 @@ spring:
   output.ansi.enabled: always
   datasource:
       schema: createAclSchema.sql
+      # Due to the bug https://jira.spring.io/browse/SPR-12649,
+      # we have to append the data initialization script to the schema
+#      data: import.sql
       url: jdbc:h2:mem:dev;DB_CLOSE_ON_EXIT=FALSE
       username: sa
   profiles:
@@ -28,6 +31,8 @@ spring:
   profiles: dev
   jpa:
       show-sql: true
+
+hibernate.hbm2ddl.import_files: import.sql
 
 logging.level:
   com.athena: DEBUG

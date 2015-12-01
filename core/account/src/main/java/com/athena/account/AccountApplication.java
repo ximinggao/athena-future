@@ -39,7 +39,7 @@ public class AccountApplication {
     @Bean(name = "org.h2.tools.Server", initMethod = "start", destroyMethod = "stop")
     @Profile("dev")
     public Server h2TcpServer() throws SQLException {
-        return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9999");
+        return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9990");
     }
 
     // It seems Spring Boot MessageSourceAutoConfiguration not working (need further checking),

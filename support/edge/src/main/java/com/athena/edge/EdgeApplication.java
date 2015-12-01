@@ -36,7 +36,7 @@ public class EdgeApplication {
     @Bean(name = "org.h2.tools.Server", initMethod = "start", destroyMethod = "stop")
     @Profile("dev")
     public Server h2TcpServer() throws SQLException {
-        return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9999");
+        return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9980");
     }
 
     // Configuration related to Zuul error handling in Undertow.
