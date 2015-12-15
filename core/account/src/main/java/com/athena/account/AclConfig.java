@@ -6,6 +6,7 @@ import org.springframework.cache.ehcache.EhCacheFactoryBean;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.acls.domain.*;
 import org.springframework.security.acls.model.AclCache;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,16 +20,10 @@ public class AclConfig {
 //    private DataSource dataSource;
 //
 //    @Bean
-//    public DefaultMethodSecurityExpressionHandler defaultMethodSecurityExpressionHandler(PermissionEvaluator permissionEvaluator) {
-//        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-//        roleHierarchy.setHierarchy("ROLE_ADMIN > ROLE_BOSS > ROLE_STAFF > ROLE_USER");
-//
-//        DefaultMethodSecurityExpressionHandler expressionHandler = new DefaultMethodSecurityExpressionHandler();
-//        expressionHandler.setRoleHierarchy(roleHierarchy);
-//        expressionHandler.setPermissionEvaluator(permissionEvaluator);
-//        return expressionHandler;
+//    public DefaultMethodSecurityExpressionHandler defaultMethodSecurityExpressionHandler() {
+//        return new AclBasedMethodSecurityExpressionHandler();
 //    }
-//
+
 //    @Bean
 //    public PermissionEvaluator aclPermissionEvaluator(AclService aclService) {
 //        return new AclPermissionEvaluator(aclService);

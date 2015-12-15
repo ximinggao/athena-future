@@ -7,6 +7,7 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerInitial
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.security.acls.AclPermissionCacheOptimizer;
 import org.springframework.security.acls.AclPermissionEvaluator;
 import org.springframework.security.acls.domain.AclAuthorizationStrategy;
 import org.springframework.security.acls.domain.AuditLogger;
@@ -26,7 +27,8 @@ import javax.sql.DataSource;
  * https://gist.github.com/dsyer/ebeb25d5afbdd9242cd5
  * https://jira.spring.io/browse/SEC-2815
  *
- * To avoid this issue, we have to lazily set the DataSource after the servlet container has been initialized.
+ * To avoid this issue, we have to lazily set the DataSource after the servlet container has been initialized by
+ * listening on the EmbeddedServletContainerInitializedEvent.
  */
 @Component
 public class AclBasedMethodSecurityExpressionHandler extends DefaultMethodSecurityExpressionHandler
@@ -57,5 +59,7 @@ public class AclBasedMethodSecurityExpressionHandler extends DefaultMethodSecuri
         JdbcMutableAclService aclService = new JdbcMutableAclService(dataSource, lookupStrategy, aclCache);
         AclPermissionEvaluator permissionEvaluator = new AclPermissionEvaluator(aclService);
         this.setPermissionEvaluator(permissionEvaluator);
+
+        this.setPermissionCacheOptimizer(new AclPermissionCacheOptimizer(aclService));
     }
 }
