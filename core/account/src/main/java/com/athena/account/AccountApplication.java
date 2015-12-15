@@ -10,6 +10,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/")
 @ComponentScan("com.athena")
+@Import({SecurityConfig.class, AclConfig.class})
 public class AccountApplication {
 
     public static void main(String[] args) {
