@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Entity
 @Data
-public class AdminPost {
+public class AdminPost implements Post {
     @Id
     @GeneratedValue
     private Long id;

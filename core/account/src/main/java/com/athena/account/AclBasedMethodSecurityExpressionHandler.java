@@ -50,7 +50,7 @@ public class AclBasedMethodSecurityExpressionHandler extends DefaultMethodSecuri
 
         // Set role hierarchy
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-        roleHierarchy.setHierarchy("ROLE_ADMIN > ROLE_BOSS > ROLE_STAFF > ROLE_USER");
+        roleHierarchy.setHierarchy("ROLE_ADMIN > ROLE_USER > ROLE_VISITOR");
         this.setRoleHierarchy(roleHierarchy);
 
         // Set permission evaluator
