@@ -1,16 +1,23 @@
 package com.athena.account.service;
 
 import com.athena.account.persistence.Post;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created by brook.xi on 12/16/2015.
  */
-public interface GenericService<T extends Post> {
+@Transactional(readOnly = true)
+public abstract class GenericService<T extends Post, U extends JpaRepository<T, Long>> {
+    @Autowired
+    protected U postRepo;
+
     /**
      *  Retrieves a single post.
      *  <p>
@@ -18,7 +25,9 @@ public interface GenericService<T extends Post> {
      *  returnObject refers to the returned object.
      */
     @PostAuthorize("hasPermission(returnObject, 'WRITE')")
-    T getSingle(Long id);
+    public T getSingle(Long id) {
+        return postRepo.findOne(id);
+    }
 
     /**
      *  Retrieves all posts.
@@ -27,7 +36,9 @@ public interface GenericService<T extends Post> {
      *  filterObject refers to the returned object list.
      */
     @PostFilter("hasPermission(filterObject, 'READ')")
-    List<T> getAll();
+    public List<T> getAll() {
+        return postRepo.findAll();
+    }
 
     /**
      * Adds a new post.
@@ -45,7 +56,10 @@ public interface GenericService<T extends Post> {
      * <p>
      *
      */
-    T add(T post);
+    @Transactional
+    public T add(T post) {
+        return postRepo.save(post);
+    }
 
     /**
      * Edits a post.
@@ -54,7 +68,10 @@ public interface GenericService<T extends Post> {
      * <b>#post</b> refers to the current object in the method argument.
      */
     @PreAuthorize("hasPermission(#post, 'WRITE')")
-    T edit(T post);
+    @Transactional
+    public T edit(T post) {
+        return postRepo.save(post);
+    }
 
     /**
      * Deletes a post.
@@ -63,5 +80,8 @@ public interface GenericService<T extends Post> {
      * <b>#post</b> refers to the current object in the method argument.
      */
     @PreAuthorize("hasPermission(#post, 'WRITE')")
-    void delete(T post);
+    @Transactional
+    public void delete(T post) {
+        postRepo.delete(post);
+    }
 }
