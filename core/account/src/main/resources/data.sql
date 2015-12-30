@@ -50,9 +50,9 @@ create table if not exists acl_entry(
 -- Dumping data for table `acl_sid`
 --
 
-INSERT INTO acl_sid (id, principal, sid) VALUES (1, 1, 'john');
-INSERT INTO acl_sid (id, principal, sid) VALUES (2, 1, 'jane');
-INSERT INTO acl_sid (id, principal, sid) VALUES (3, 1, 'mike');
+INSERT INTO acl_sid (id, principal, sid) VALUES (1, 1, '1');
+INSERT INTO acl_sid (id, principal, sid) VALUES (2, 1, '2');
+INSERT INTO acl_sid (id, principal, sid) VALUES (3, 1, '3');
 
 --
 -- Dumping data for table acl_class
