@@ -58,9 +58,9 @@ INSERT INTO acl_sid (id, principal, sid) VALUES (3, 1, '3');
 -- Dumping data for table acl_class
 --
 
-INSERT INTO acl_class (id, class) VALUES (1, 'org.krams.tutorial.domain.AdminPost');
-INSERT INTO acl_class (id, class) VALUES (2, 'org.krams.tutorial.domain.PersonalPost');
-INSERT INTO acl_class (id, class) VALUES (3, 'org.krams.tutorial.domain.PublicPost');
+INSERT INTO acl_class (id, class) VALUES (1, 'com.athena.account.persistence.AdminPost');
+INSERT INTO acl_class (id, class) VALUES (2, 'com.athena.account.persistence.PersonalPost');
+INSERT INTO acl_class (id, class) VALUES (3, 'com.athena.account.persistence.PublicPost');
 
 --
 -- Dumping data for table acl_object_identity
