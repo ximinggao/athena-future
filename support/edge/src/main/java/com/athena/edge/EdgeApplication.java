@@ -1,6 +1,7 @@
 package com.athena.edge;
 
 import io.undertow.servlet.api.DeploymentInfo;
+import org.h2.tools.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.undertow.UndertowDeploymentInfoCustomizer;
@@ -12,7 +13,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.h2.tools.Server;
+
 import java.sql.SQLException;
 import java.util.Date;
 

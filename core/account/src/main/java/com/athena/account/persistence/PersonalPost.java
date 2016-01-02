@@ -1,7 +1,6 @@
 package com.athena.account.persistence;
 
 import lombok.Data;
-import org.jboss.logging.annotations.Pos;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

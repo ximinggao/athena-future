@@ -1,6 +1,5 @@
 package com.athena.account;
 
-import com.athena.common.configuration.AclConfig;
 import com.athena.common.exception.AlreadyBookedException;
 import com.athena.common.user.AthenaUserDetails;
 import com.athena.common.user.CurrentUser;
@@ -11,7 +10,6 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
