@@ -1,4 +1,4 @@
-package com.athena.account;
+package com.athena.common.configuration;
 
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;

@@ -20,30 +20,6 @@
 //}
 
 dependencies {
-//    compile('org.springframework.boot:spring-boot-starter-actuator')
-//    compile('org.springframework.boot:spring-boot-starter-amqp')
-//    compile('org.springframework.boot:spring-boot-starter-aop')
-//    compile('org.springframework.cloud:spring-cloud-starter-config')
-//    compile('org.springframework.cloud:spring-cloud-starter-eureka')
-//    compile('org.springframework.boot:spring-boot-starter-data-elasticsearch')
-//    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-//    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-//    compile('org.springframework.boot:spring-boot-starter-integration')
-//    compile('org.springframework.boot:spring-boot-starter-jdbc')
-//    compile('org.springframework.boot:spring-boot-starter-redis')
-//    compile('org.springframework.session:spring-session:1.0.2.RELEASE')
-//    compile('org.springframework.boot:spring-boot-starter-remote-shell')
-//    compile('org.springframework.boot:spring-boot-starter-security')
-//    compile('org.springframework.boot:spring-boot-starter-web') {
-//        exclude module: 'spring-boot-starter-tomcat'
-//    }
-//    compile('org.springframework.boot:spring-boot-starter-undertow')
-//    compile('org.projectlombok:lombok:1.16.6')
-//    runtime('com.h2database:h2')
-//    runtime('mysql:mysql-connector-java')
-//    testCompile('org.springframework.boot:spring-boot-starter-test')
-    compile 'org.springframework.security:spring-security-acl:4.0.3.RELEASE'
-    compile 'net.sf.ehcache:ehcache:2.9.1'
     testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:1.0.0.RELEASE'
 }
 

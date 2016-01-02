@@ -1,5 +1,6 @@
 package com.athena.account;
 
+import com.athena.common.configuration.AclConfig;
 import com.athena.common.exception.AlreadyBookedException;
 import com.athena.common.user.AthenaUserDetails;
 import com.athena.common.user.CurrentUser;
@@ -28,8 +29,8 @@ import java.util.UUID;
 @EnableEurekaClient
 @RestController
 @RequestMapping("/")
-@ComponentScan("com.athena")
-@Import({SecurityConfig.class, AclConfig.class})
+@ComponentScan({"com.athena.account", "com.athena.common"})
+//@Import({SecurityConfig.class, AclConfig.class})
 public class AccountApplication {
 
     public static void main(String[] args) {
